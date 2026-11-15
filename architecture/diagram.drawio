@@ -1,0 +1,47 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Architecture" id="arch1">
+    <mxGraphModel dx="1100" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="user" value="User (browser)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="cf" value="CloudFront&#xa;(CDN)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="230" y="260" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="s3" value="S3&#xa;(static frontend)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="420" y="120" width="130" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="waf" value="AWS WAF&#xa;(rate limit + OWASP rules)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="420" y="260" width="130" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="apigw" value="API Gateway&#xa;(REST, Cognito authorizer)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="620" y="260" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="lambda" value="Lambda&#xa;(CRUD handler)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="830" y="260" width="130" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="ddb" value="DynamoDB&#xa;(Todos table)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="260" width="130" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="cognito" value="Cognito User Pool&#xa;(login + JWT tokens)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="620" y="440" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="xray" value="X-Ray&#xa;(tracing)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="830" y="440" width="130" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e1" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;" edge="1" parent="1" source="user" target="cf"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" value="/ (static files)" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;" edge="1" parent="1" source="cf" target="s3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" value="/todos*" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;" edge="1" parent="1" source="cf" target="waf"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;" edge="1" parent="1" source="waf" target="apigw"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e5" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;" edge="1" parent="1" source="apigw" target="lambda"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e6" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;" edge="1" parent="1" source="lambda" target="ddb"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e7" value="validate token" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;dashed=1;" edge="1" parent="1" source="apigw" target="cognito"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e8" value="traces" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;dashed=1;" edge="1" parent="1" source="lambda" target="xray"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
