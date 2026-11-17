@@ -20,7 +20,6 @@ A fully serverless to-do application. Users sign up and sign in with **Amazon Co
 10. [Requirements and what was implemented](#10-requirements-and-what-was-implemented)
 11. [Lessons learned and future improvements](#11-lessons-learned-and-future-improvements)
 12. [Repository structure](#12-repository-structure)
-13. [Clean-up](#13-clean-up)
 
 ---
 
@@ -220,9 +219,3 @@ The project stays on the AWS free tier at demo scale: Lambda, DynamoDB on-demand
 └── screenshots/
 ```
 
-## 13. Clean-up
-
-Delete in this order: CloudFront distribution, API Gateway `todo-api`, Lambda `todo-handler`, Cognito user pool, DynamoDB table `Todos`, S3 bucket (empty it first), and the IAM roles `todo-lambda-role` and the auto-created `todo-handler-role-...`.
-
----
-*Built as the graduation project for the AWS Solutions Architect – Associate track.*
